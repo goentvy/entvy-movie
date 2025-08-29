@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui';
+import { formatDate } from '@/hooks';
 import { useEffect, useState } from 'react';
 
 // KOFIC 영화 타입
@@ -23,7 +24,8 @@ function App() {
 
     const kobisKey = import.meta.env.VITE_KOBIS_API_KEY;
     const tmdbKey = import.meta.env.VITE_TMDB_API_KEY;
-    const targetDate = "20250827";
+    const today = new Date();
+    const targetDate = formatDate(today);
 
     const kobisUrl = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${kobisKey}&targetDt=${targetDate}`;
     
@@ -74,7 +76,6 @@ function App() {
     if (error) {
         return <p className="text-center py-10 text-red-500">{error}</p>;
     }
-
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
